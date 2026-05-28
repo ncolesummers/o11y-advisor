@@ -1,0 +1,33 @@
+# Elixir / Phoenix
+_build/
+deps/
+.fetch
+*.beam
+erl_crash.dump
+*.ez
+.elixir_ls/
+priv/static/
+cover/
+.mix/
+
+# Go
+bin/
+*.test
+coverage.out
+vendor/
+
+# Secrets and environment
+.env
+.env.*
+*.secret
+config/prod.secret.exs
+config/runtime.secret.exs
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+*.swp
+*.swo
