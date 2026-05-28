@@ -1,0 +1,50 @@
+name: Nightly Evals
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # 06:00 UTC daily
+  workflow_dispatch: # allow manual trigger
+
+env:
+  MIX_ENV: test
+  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+jobs:
+  evals-threshold:
+    name: Evals (threshold)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: o11y_advisor_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: erlef/setup-beam@v1
+        with:
+          elixir-version: "1.17"
+          otp-version: "27"
+      - uses: actions/cache@v4
+        with:
+          path: |
+            backend/deps
+            backend/_build
+          key: elixir-${{ hashFiles('backend/mix.lock') }}
+      - run: mix deps.get
+      - run: mix ecto.create
+      - run: mix ecto.migrate
+      - run: mix eval.run
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/o11y_advisor_test
