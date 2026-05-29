@@ -140,7 +140,7 @@ Write an ADR when the decision is:
 - Consequences — positive and negative trade-offs
 - Related — links to PRD sections and related ADRs
 
-**Numbering:** Next is `0003`. Place at `docs/adr/NNNN-<slug>.md`.
+**Numbering:** Next is `0004`. Place at `docs/adr/NNNN-<slug>.md`.
 
 ## Local development setup
 
