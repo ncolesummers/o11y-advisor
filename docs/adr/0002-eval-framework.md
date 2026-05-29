@@ -1,6 +1,6 @@
 # ADR-0002: Evaluation Framework — Arcana Eval + Tribunal
 
-**Status:** Accepted (with licensing caveat on Tribunal)  
+**Status:** Accepted  
 **Date:** 2026-05-24
 
 ---
@@ -63,17 +63,9 @@ Tribunal supports red team attack generation (encoding, injection, jailbreak). T
 
 ---
 
-## Tribunal licensing caveat
+## Tribunal licensing
 
-As of 2026-05-24, **Tribunal has no LICENSE file**. GitHub reports `null` for its SPDX identifier. No license = all rights reserved by default.
-
-Mitigations, in order of preference:
-
-1. **Open a GitHub issue asking the author to add a license.** The repo is actively maintained (last push: 2026-05-13) and has 90 stars; this is a reasonable ask.
-2. **Limit Tribunal to the eval directory only.** Evals are not distributed to end users (they live in the backend repo and never ship in the CLI binary or Arcana-based API). This limits the scope of the unlicensed dependency.
-3. **Fallback plan:** If no license is added, the Tribunal-style deterministic assertions and LLM-as-judge patterns can be reimplemented in ~200 lines of ExUnit helpers. The concepts are standard; the library is convenient, not irreplaceable.
-
-Do not mark this ADR fully resolved until Tribunal's license status is confirmed.
+**Resolved 2026-05-29.** Tribunal's author added an MIT License (SPDX: `MIT`) on 2026-05-29. The dependency is now unambiguously usable. Spike #14 closed.
 
 ---
 
@@ -89,7 +81,6 @@ Do not mark this ADR fully resolved until Tribunal's license status is confirmed
 
 **Negative / trade-offs:**
 
-- Tribunal's unlicensed status introduces a dependency risk. Mitigation above.
 - Handwritten eval cases for judgment categories are labor-intensive. The 20-case MVP target (Milestone 1) is achievable; 100–200 full-set cases are a sustained effort.
 - LLM-as-judge evals (Tribunal) require an LLM call per eval case — adds latency and cost to CI. Mitigate by running threshold-based evals on PR merge only, not on every commit.
 
