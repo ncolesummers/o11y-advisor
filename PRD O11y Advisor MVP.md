@@ -827,7 +827,7 @@ CLI / MCP / CI
 
 Decided in [ADR-0001](docs/adr/0001-polyglot-architecture.md) and [ADR-0002](docs/adr/0002-eval-framework.md).
 
-**Backend — Elixir/Phoenix (hosted on Fly.io)**
+#### Backend — Elixir/Phoenix (hosted on Fly.io)
 
 - **Language:** Elixir/Phoenix
 - **RAG engine:** Arcana (graph RAG — hybrid vector + keyword search, graph community detection, cross-encoder reranking)
@@ -838,7 +838,7 @@ Decided in [ADR-0001](docs/adr/0001-polyglot-architecture.md) and [ADR-0002](doc
 - **Eval:** Arcana eval (retrieval quality); Tribunal (answer quality + structured output validity) — see ADR-0002
 - **Lint/format:** `mix format`
 
-**CLI — Go (local binary)**
+#### CLI — Go (local binary)
 
 - **Language:** Go
 - **Distribution:** single compiled binary, zero runtime dependency (`brew` or `go install`)
