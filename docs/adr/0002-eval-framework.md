@@ -80,6 +80,7 @@ Do not mark this ADR fully resolved until Tribunal's license status is confirmed
 ## Consequences
 
 **Positive:**
+
 - Both tools are Elixir-native and maintained by the same author as Arcana — low integration friction.
 - Three eval surfaces are explicitly owned rather than conflated.
 - CI mode split answers a PRD open question concretely.
@@ -87,6 +88,7 @@ Do not mark this ADR fully resolved until Tribunal's license status is confirmed
 - Eval work is scoped to the backend repo and does not affect CLI distribution.
 
 **Negative / trade-offs:**
+
 - Tribunal's unlicensed status introduces a dependency risk. Mitigation above.
 - Handwritten eval cases for judgment categories are labor-intensive. The 20-case MVP target (Milestone 1) is achievable; 100–200 full-set cases are a sustained effort.
 - LLM-as-judge evals (Tribunal) require an LLM call per eval case — adds latency and cost to CI. Mitigate by running threshold-based evals on PR merge only, not on every commit.
@@ -97,5 +99,5 @@ Do not mark this ADR fully resolved until Tribunal's license status is confirmed
 
 - PRD: `PRD O11y Advisor MVP.md` §13 (Quality Metrics), §14 (Evaluation Plan)
 - ADR-0001: `docs/adr/0001-polyglot-architecture.md` — Elixir backend context
-- Arcana evaluation guide: https://github.com/georgeguimaraes/arcana/blob/main/guides/evaluation.md
-- Tribunal: https://github.com/georgeguimaraes/tribunal
+- Arcana evaluation guide: <https://github.com/georgeguimaraes/arcana/blob/main/guides/evaluation.md>
+- Tribunal: <https://github.com/georgeguimaraes/tribunal>

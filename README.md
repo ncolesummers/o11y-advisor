@@ -10,7 +10,7 @@ A specialist observability advisor for developers and coding agents. Ask it how 
 
 o11y-advisor exposes a curated knowledge base (OpenTelemetry, Prometheus, Grafana, Loki, Tempo, SRE practices) through three surfaces:
 
-- **CLI** — `o11y ask`, `o11y audit-repo`, `o11y review-collector`, `o11y review-alerts`
+- **CLI** — `o11y ask`, `o11y audit-repo`, `o11y review-plan`, `o11y review-collector`, `o11y review-alerts`, `o11y mcp serve`, `o11y skill install`
 - **MCP server** — `o11y mcp serve` (stdio transport, usable by Claude Code and other agent harnesses)
 - **Agent Skill** — packaged Claude Code skill for use in agentic coding workflows
 

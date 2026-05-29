@@ -792,19 +792,14 @@ A failing **retrieval quality** eval means the right sources weren't surfaced �
 
 ## 15. Technical Architecture
 
-### Proposed Components
+### Repository Layout
 
 ```plaintext
 o11y-advisor/
-  cli/
-  mcp/
-  skill/
-  ingestion/
-  retrieval/
-  evals/
-  advisor/
-  templates/
-  examples/
+  backend/    Elixir/Phoenix — RAG engine, API, ingestion, evals
+  cli/        Go — single binary, MCP stdio proxy
+  skill/      Agent Skill packaging (SKILL.md, helper scripts)
+  docs/       ADRs and supporting documentation
 ```
 
 ### Runtime Components
@@ -828,22 +823,29 @@ Advisor API
 CLI / MCP / CI
 ```
 
-### Suggested Implementation Stack
+### Implementation Stack
 
-This can vary, but a practical stack would be:
+Decided in [ADR-0001](docs/adr/0001-polyglot-architecture.md) and [ADR-0002](docs/adr/0002-eval-framework.md).
 
-- **Language:** Python
-- **CLI:** Typer or Click
-- **MCP:** Python MCP SDK
-- **Validation:** Pydantic
-- **Packaging:** uv
-- **Retrieval:** hybrid search with vector + keyword search
-- **Embeddings:** `text-embedding-3-small` (OpenAI) for MVP; evaluate `nomic-embed-text` (open, self-hostable) for offline mode
-- **Storage:** SQLite for MVP metadata; `chromadb` or equivalent for vectors
+**Backend — Elixir/Phoenix (hosted on Fly.io)**
+
+- **Language:** Elixir/Phoenix
+- **RAG engine:** Arcana (graph RAG — hybrid vector + keyword search, graph community detection, cross-encoder reranking)
+- **Storage:** PostgreSQL + pgvector (documents, chunks, embeddings, knowledge graph)
+- **Embeddings:** `text-embedding-3-small` (OpenAI) for MVP; evaluate `nomic-embed-text` for offline mode
 - **Docs ingestion:** GitHub API (primary); Markdown parser for `.md` files; HTML fallback for sources without a public repo
-- **Testing:** pytest
-- **Eval:** custom eval harness or pydantic-evals
-- **Lint/type checking:** ruff + pyright
+- **Testing:** ExUnit; integration tests require real Postgres (no mocks)
+- **Eval:** Arcana eval (retrieval quality); Tribunal (answer quality + structured output validity) — see ADR-0002
+- **Lint/format:** `mix format`
+
+**CLI — Go (local binary)**
+
+- **Language:** Go
+- **Distribution:** single compiled binary, zero runtime dependency (`brew` or `go install`)
+- **MCP transport (MVP):** `o11y mcp serve` runs as a stdio process and proxies MCP tool calls to the Elixir API
+- **Output formats:** text, JSON, Markdown
+- **Testing:** `go test`; coverage ≥ 80% enforced in CI
+- **Lint/format:** `gofmt` + `goimports`
 
 ⠀
 ⸻
@@ -916,19 +918,19 @@ This can vary, but a practical stack would be:
 
 **Resolved for MVP:**
 
-- MCP server wraps CLI internals (not a separate API layer).
+- MCP server wraps CLI internals (not a separate API layer). The Go CLI binary is the MCP stdio server.
 - Agent Skill targets Claude Code for MVP; Codex and Cursor are follow-on.
 - Embeddings: `text-embedding-3-small` for MVP.
 - Ingestion: GitHub repo source is the default; web scraping is secondary and requires explicit approval.
+- Storage: hosted PostgreSQL + pgvector on Fly.io. Local vector store and SQLite are not used. Knowledge base is shared infrastructure; users do not run their own copy. (ADR-0001)
+- Offline mode: deferred. The CLI requires network access to the hosted backend. A bundled snapshot may be added post-MVP. (ADR-0001)
+- CI strictness: hard-fail on correctness invariants (schema validity, `must_not_include` violations, banned source citations) on every CI run; threshold-based quality metrics (≥80% correct, ≥90% with citations, <10% unsupported claims) on PR merge and nightly. (ADR-0002)
 
 **Open Questions:**
 
-- Should the first implementation use a local vector store or SQLite-backed retrieval?
 - Should source ingestion happen at build time, install time, or on demand?
 - Should semconv version pinning be enforced at ingestion time, query time, or both?
-- Should the advisor support offline mode with a bundled docs snapshot?
 - Should the project include generated Grafana dashboards in MVP or defer them?
-- How strict should CI mode be by default?
 - Should the advisor support organization-specific observability standards later?
 
 ⠀

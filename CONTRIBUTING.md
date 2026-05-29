@@ -75,7 +75,7 @@ mix test --only hard_fail
 
 ExCoveralls enforces the 80% threshold in CI. Add `{:excoveralls, "~> 0.18", only: :test}` to `mix.exs`.
 
-Integration tests hit a real Postgres instance (pgvector). Do not mock the database — we got the ADR wrong once this way. Use Docker locally:
+Integration tests hit a real Postgres instance (pgvector). Do not mock the database. Use Docker locally:
 
 ```bash
 docker compose up -d postgres
