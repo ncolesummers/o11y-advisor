@@ -31,14 +31,15 @@ The knowledge base (embeddings, graph, retrieval) lives in the hosted backend an
 ## Repository layout
 
 ```
+backend/        Elixir/Phoenix API (ExCoveralls + Credo configured)
+cli/            Go CLI binary (cobra, zero runtime dependencies)
 docs/
   adr/          Architecture Decision Records
+LICENSE         MIT
 PRD O11y Advisor MVP.md   Product requirements
 CLAUDE.md       AI coding guidelines
 CONTRIBUTING.md Development process
 ```
-
-Backend (`backend/`) and CLI (`cli/`) directories will be added once implementation begins.
 
 ## Contributing
 
