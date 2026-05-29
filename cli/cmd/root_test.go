@@ -11,7 +11,9 @@ func TestHelp(t *testing.T) {
 	root := newRootCmd()
 	root.SetOut(buf)
 	root.SetArgs([]string{"--help"})
-	_ = root.Execute()
+	if err := root.Execute(); err != nil {
+		t.Fatal(err)
+	}
 	if !strings.Contains(buf.String(), "o11y") {
 		t.Errorf("help output missing 'o11y': %s", buf.String())
 	}
