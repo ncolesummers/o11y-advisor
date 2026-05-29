@@ -1,0 +1,67 @@
+name: Epic
+description: A durable capability theme that groups related user stories (spans milestones).
+title: "Epic: "
+labels: ["epic"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Epics are **capability themes**, not time-boxes. Stories are tracked as sub-issues;
+        each story's own milestone field sequences delivery.
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal / outcome
+      description: What capability does this epic deliver, and why does it matter?
+    validations:
+      required: true
+  - type: textarea
+    id: in-scope
+    attributes:
+      label: Capabilities in scope
+      description: Bullet the major capabilities/stories this epic covers.
+    validations:
+      required: true
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of scope
+      description: What this epic explicitly does NOT cover (prevents scope creep).
+    validations:
+      required: false
+  - type: dropdown
+    id: milestones
+    attributes:
+      label: Spanned milestones
+      multiple: true
+      options:
+        - "M0 — Foundation"
+        - "M1 — Knowledge Base Prototype"
+        - "M2 — CLI Advisor"
+        - "M3 — Repository Audit + SLO/Runbook"
+        - "M4 — MCP Integration"
+        - "M5 — Agent Skill"
+        - "M6 — Portfolio Demo"
+    validations:
+      required: true
+  - type: textarea
+    id: success
+    attributes:
+      label: Success criteria
+      description: How do we know this epic is complete? (Observable, not "it works".)
+    validations:
+      required: true
+  - type: textarea
+    id: children
+    attributes:
+      label: Child stories
+      description: Sub-issues are auto-tracked below; mirror the planned story list here for context.
+    validations:
+      required: false
+  - type: textarea
+    id: related
+    attributes:
+      label: Related PRD sections / ADRs
+      description: e.g. PRD §8 (Knowledge Base), ADR-0001, ADR-0002.
+    validations:
+      required: false

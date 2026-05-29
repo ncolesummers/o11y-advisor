@@ -1,0 +1,59 @@
+name: Bug
+description: Something isn't working as intended.
+title: "Bug: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What's wrong, in one or two sentences.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: input
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: input
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Elixir/OTP or Go version, CLI version / commit, backend env.
+    validations:
+      required: false
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - "sev1 — critical / data loss / outage"
+        - "sev2 — major feature broken, no workaround"
+        - "sev3 — feature broken, workaround exists"
+        - "sev4 — minor / cosmetic"
+    validations:
+      required: true
+  - type: textarea
+    id: regression-test
+    attributes:
+      label: Regression test
+      description: Describe the failing test that reproduces this bug. Write it first (red), then fix (green).
+    validations:
+      required: true

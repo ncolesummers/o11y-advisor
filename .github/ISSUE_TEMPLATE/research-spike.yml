@@ -1,0 +1,59 @@
+name: Research Spike
+description: A time-boxed investigation to resolve an unknown before committing to an approach.
+title: "Spike: "
+labels: ["spike"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A spike answers a question — it does not ship a feature. Keep it time-boxed and end
+        with a concrete deliverable (a decision, an ADR, or a throwaway prototype).
+  - type: textarea
+    id: question
+    attributes:
+      label: Question to answer
+      description: The specific unknown. A spike with no crisp question will sprawl.
+    validations:
+      required: true
+  - type: textarea
+    id: unblocks
+    attributes:
+      label: What it unblocks / why now
+      description: Which stories or decisions depend on this answer.
+    validations:
+      required: true
+  - type: input
+    id: timebox
+    attributes:
+      label: Time-box
+      description: e.g. "1 day", "4 hours". Stop and report when it's spent.
+    validations:
+      required: true
+  - type: textarea
+    id: approach
+    attributes:
+      label: Investigation approach
+      description: How you'll explore — experiments, docs to read, prototypes to build.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Candidate sources
+      description: Docs, repos, specs, or licenses to evaluate (esp. for knowledge-base source questions).
+    validations:
+      required: false
+  - type: textarea
+    id: deliverable
+    attributes:
+      label: Deliverable
+      description: Decision note, ADR (which number?), or prototype location.
+    validations:
+      required: true
+  - type: textarea
+    id: exit
+    attributes:
+      label: Exit criteria
+      description: What "done" looks like for this investigation.
+    validations:
+      required: true

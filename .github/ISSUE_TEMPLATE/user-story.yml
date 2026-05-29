@@ -1,0 +1,109 @@
+name: User Story
+description: A unit of deliverable work, detailed enough for a coding agent to complete via TDD.
+title: "Story: "
+labels: ["user-story"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Write this so a coding agent can execute it end-to-end. The **Test Plan** is the
+        contract: the agent runs it and uses the expected outcomes to confirm the work is done.
+        Practice TDD — write the listed tests first, watch them fail, then implement.
+  - type: dropdown
+    id: milestone
+    attributes:
+      label: Milestone
+      description: Will also be set as the native milestone when this issue is created.
+      options:
+        - "M0 — Foundation"
+        - "M1 — Knowledge Base Prototype"
+        - "M2 — CLI Advisor"
+        - "M3 — Repository Audit + SLO/Runbook"
+        - "M4 — MCP Integration"
+        - "M5 — Agent Skill"
+        - "M6 — Portfolio Demo"
+    validations:
+      required: true
+  - type: input
+    id: epic
+    attributes:
+      label: Parent epic
+      description: Issue number of the epic this belongs to (e.g. #12). Also link as a sub-issue.
+    validations:
+      required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      multiple: true
+      options:
+        - backend
+        - cli
+        - mcp
+        - evals
+        - skill
+        - docs
+        - ci
+    validations:
+      required: true
+  - type: textarea
+    id: story
+    attributes:
+      label: User story
+      value: |
+        As a <role>,
+        I want <capability>,
+        so that <benefit>.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context & pointers
+      description: Files/patterns to reuse, relevant PRD sections, ADRs, and any prior art. Keep an agent from guessing.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Story-specific, checkable outcomes. Do NOT restate the PR checklist (coverage/format/etc.) — that lives in the PR template.
+      value: |
+        - [ ]
+        - [ ]
+    validations:
+      required: true
+  - type: textarea
+    id: test-plan
+    attributes:
+      label: Test Plan (TDD)
+      description: Tests to write first, then functional verification. Phrase each step as `command → expected observable outcome` so the agent can self-verify.
+      value: |
+        **Unit tests to write first**
+        - [ ]
+
+        **Functional verification (command → expected outcome)**
+        - [ ] `<command>` → `<observable result>`
+    validations:
+      required: true
+  - type: textarea
+    id: eval-gate
+    attributes:
+      label: Eval gate
+      description: Does this feature need evals to exist BEFORE it can be considered done? If so, link the eval story it is blocked by. If not, write "none".
+    validations:
+      required: true
+  - type: input
+    id: blocked-by
+    attributes:
+      label: Dependencies / blocked by
+      description: Issue numbers that must land first (e.g. #21, #22). Leave blank if none.
+    validations:
+      required: false
+  - type: textarea
+    id: docs-impact
+    attributes:
+      label: Docs impact
+      description: If this changes code or behavior, which docs are updated (README / CONTRIBUTING / new ADR)? Write "none" if no behavior change.
+    validations:
+      required: true
