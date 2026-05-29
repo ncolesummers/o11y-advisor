@@ -1,0 +1,54 @@
+name: Technical Debt
+description: A known shortcut, rough edge, or maintainability issue to pay down.
+title: "Tech debt: "
+labels: ["tech-debt"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What & where
+      description: The debt and the files/modules it lives in.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it's debt
+      description: What makes the current state problematic (coupling, duplication, missing tests, shortcut taken under time pressure, etc.).
+    validations:
+      required: true
+  - type: textarea
+    id: risk
+    attributes:
+      label: Risk if unaddressed
+      description: What breaks or slows down if we leave it.
+    validations:
+      required: true
+  - type: textarea
+    id: remediation
+    attributes:
+      label: Proposed remediation
+    validations:
+      required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: Affected components
+      multiple: true
+      options:
+        - backend
+        - cli
+        - mcp
+        - evals
+        - skill
+        - docs
+        - ci
+    validations:
+      required: true
+  - type: textarea
+    id: test-plan
+    attributes:
+      label: Test plan
+      description: How we verify the remediation doesn't regress behavior (tests to keep green / add).
+    validations:
+      required: true

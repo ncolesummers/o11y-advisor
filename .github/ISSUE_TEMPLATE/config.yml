@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Product Requirements (PRD)
+    url: https://github.com/ncolesummers/o11y-advisor/blob/main/PRD%20O11y%20Advisor%20MVP.md
+    about: Scope, milestones, and success metrics for the MVP.
+  - name: Contributing & development process
+    url: https://github.com/ncolesummers/o11y-advisor/blob/main/CONTRIBUTING.md
+    about: Branching, commit conventions, testing, and the PR checklist.
