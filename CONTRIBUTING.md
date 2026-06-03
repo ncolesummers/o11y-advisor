@@ -111,7 +111,7 @@ mix eval.run          # full eval suite
 mix eval.run --quick  # retrieval evals only (faster)
 ```
 
-Threshold evals call an LLM — set `ANTHROPIC_API_KEY` in your environment.
+Threshold evals call an LLM — set `GOOGLE_API_KEY` in your environment (dev default; see ADR-0004).
 
 ## Code style
 
@@ -140,13 +140,13 @@ Write an ADR when the decision is:
 - Consequences — positive and negative trade-offs
 - Related — links to PRD sections and related ADRs
 
-**Numbering:** Next is `0004`. Place at `docs/adr/NNNN-<slug>.md`.
+**Numbering:** Next is `0005`. Place at `docs/adr/NNNN-<slug>.md`.
 
 ## Local development setup
 
 Prerequisites will be documented here once the backend and CLI directories exist. Coming in Milestone 1:
 
-- Elixir 1.17+ / OTP 27
+- Elixir 1.18+ / OTP 27
 - Go 1.23+
 - Docker (for Postgres + pgvector)
-- `ANTHROPIC_API_KEY` for eval and LLM-as-judge features
+- `GOOGLE_API_KEY` for eval and LLM-as-judge features (dev default; see ADR-0004)

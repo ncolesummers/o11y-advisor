@@ -50,3 +50,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for branching strategy, commit convention
 - [Product Requirements (PRD)](PRD%20O11y%20Advisor%20MVP.md)
 - [ADR-0001: Polyglot Architecture](docs/adr/0001-polyglot-architecture.md)
 - [ADR-0002: Evaluation Framework](docs/adr/0002-eval-framework.md)
+- [ADR-0003: Ingestion Timing & Semconv Pinning](docs/adr/0003-ingestion-timing-and-semconv-pinning.md)
+- [ADR-0004: LLM Inference Provider](docs/adr/0004-llm-provider.md)
