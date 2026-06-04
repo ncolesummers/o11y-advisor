@@ -59,6 +59,7 @@ defmodule O11yAdvisor.MixProject do
       {:dns_cluster, "~> 0.2.0"},
       {:bandit, "~> 1.5"},
       {:arcana, "~> 2.0"},
+      {:req, "~> 0.5"},
       {:tribunal, "~> 1.3", only: [:dev, :test]},
       {:excoveralls, "~> 0.18", only: :test},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false}

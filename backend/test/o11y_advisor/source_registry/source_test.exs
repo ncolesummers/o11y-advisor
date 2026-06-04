@@ -7,7 +7,9 @@ defmodule O11yAdvisor.SourceRegistry.SourceTest do
     repo: "open-telemetry/opentelemetry-specification",
     path_glob: "specification/**/*.md",
     license: "Apache-2.0",
-    version_pin: "v1.39.0"
+    version_pin: "v1.39.0",
+    project: "OpenTelemetry",
+    content_type: "specification"
   }
 
   test "changeset accepts an allowed license with all required fields" do

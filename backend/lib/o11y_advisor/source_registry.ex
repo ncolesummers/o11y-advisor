@@ -13,25 +13,33 @@ defmodule O11yAdvisor.SourceRegistry do
       repo: "open-telemetry/semantic-conventions",
       path_glob: "docs/**/*.md",
       license: "Apache-2.0",
-      version_pin: "v1.29.0"
+      version_pin: "v1.29.0",
+      project: "OpenTelemetry",
+      content_type: "specification"
     },
     %{
       repo: "open-telemetry/opentelemetry-specification",
       path_glob: "specification/**/*.md",
       license: "Apache-2.0",
-      version_pin: "v1.39.0"
+      version_pin: "v1.39.0",
+      project: "OpenTelemetry",
+      content_type: "specification"
     },
     %{
       repo: "PagerDuty/incident-response-docs",
       path_glob: "**/*.md",
       license: "Apache-2.0",
-      version_pin: "6353d89dff2f53de39216789393fd77f8026b47e"
+      version_pin: "6353d89dff2f53de39216789393fd77f8026b47e",
+      project: "PagerDuty",
+      content_type: "docs"
     },
     %{
       repo: "OpenSLO/oslo",
       path_glob: "**/*.md",
       license: "Apache-2.0",
-      version_pin: "v0.13.0"
+      version_pin: "v0.13.0",
+      project: "OpenSLO",
+      content_type: "specification"
     }
   ]
 
@@ -55,7 +63,7 @@ defmodule O11yAdvisor.SourceRegistry do
     %Source{}
     |> Source.changeset(attrs)
     |> Repo.insert!(
-      on_conflict: {:replace, [:license, :updated_at]},
+      on_conflict: {:replace, [:license, :project, :content_type, :updated_at]},
       conflict_target: [:repo, :path_glob, :version_pin]
     )
   end
