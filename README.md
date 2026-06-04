@@ -28,6 +28,15 @@ Elixir/Phoenix backend (hosted on Fly.io) + Go CLI (single binary, zero runtime 
 
 The knowledge base (embeddings, graph, retrieval) lives in the hosted backend and is shared across users. The CLI is a thin client that formats results.
 
+### Ingestion
+
+Ingestion is a backend Mix task (`mix ingest.run`), run on demand and on a schedule — not at build or install time (see [ADR-0003](docs/adr/0003-ingestion-timing-and-semconv-pinning.md)). For each entry in the source registry it:
+
+1. **Fetches** files matching the entry's `path_glob` at its pinned `version_pin` ref — the Git Trees API lists the repo tree, the glob filters it, and each match's raw Markdown is downloaded (`O11yAdvisor.Ingestion.GitHub`). Set `GITHUB_TOKEN`/`GH_TOKEN` to raise the API rate limit.
+2. **Parses** each file into an `O11yAdvisor.Ingestion.Document` with PRD §8 metadata stamped on — `source_url`, `title`, `project`, `content_type`, `license`, `retrieved_at`, `version` (the pinned ref), and `section_path` (`O11yAdvisor.Ingestion.MarkdownParser`).
+
+Documents are an in-memory handoff; chunking, embedding, and pgvector storage are the next stage (issue #18), which feeds each document to `Arcana.Ingest`.
+
 ## Repository layout
 
 ```
