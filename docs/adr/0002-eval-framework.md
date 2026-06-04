@@ -83,6 +83,7 @@ Tribunal supports red team attack generation (encoding, injection, jailbreak). T
 
 - Handwritten eval cases for judgment categories are labor-intensive. The 20-case MVP target (Milestone 1) is achievable; 100–200 full-set cases are a sustained effort.
 - LLM-as-judge evals (Tribunal) require an LLM call per eval case — adds latency and cost to CI. Mitigate by running threshold-based evals on PR merge only, not on every commit.
+- The LLM provider and model used for Tribunal's judge calls are configured per ADR-0004. Using a cheaper/faster model degrades eval signal; see the open question in ADR-0004 for the reassessment gate.
 
 ---
 
@@ -90,5 +91,6 @@ Tribunal supports red team attack generation (encoding, injection, jailbreak). T
 
 - PRD: `PRD O11y Advisor MVP.md` §13 (Quality Metrics), §14 (Evaluation Plan)
 - ADR-0001: `docs/adr/0001-polyglot-architecture.md` — Elixir backend context
+- ADR-0004: `docs/adr/0004-llm-provider.md` — LLM provider for Tribunal judge calls
 - Arcana evaluation guide: <https://github.com/georgeguimaraes/arcana/blob/main/guides/evaluation.md>
 - Tribunal: <https://github.com/georgeguimaraes/tribunal>

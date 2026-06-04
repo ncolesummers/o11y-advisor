@@ -1,0 +1,25 @@
+[
+  {
+    "id": "eval-otel-fastapi-001",
+    "question": "How should I instrument a FastAPI service with OpenTelemetry?",
+    "expected_topics": [
+      "FastAPI instrumentation",
+      "OpenTelemetry SDK",
+      "resource/service name",
+      "OTLP exporter",
+      "Collector pipeline"
+    ],
+    "must_not_include": [
+      "vendor-specific requirement unless asked"
+    ],
+    "source_requirements": [
+      "OpenTelemetry Python docs"
+    ],
+    "expected_sources": [
+      "open-telemetry/opentelemetry-python",
+      "open-telemetry/opentelemetry.io"
+    ],
+    "retrieval_k": 5,
+    "required_recall": 0.8
+  }
+]

@@ -5,7 +5,7 @@ defmodule O11yAdvisor.MixProject do
     [
       app: :o11y_advisor,
       version: "0.1.0",
-      elixir: "~> 1.17",
+      elixir: "~> 1.18",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -48,8 +48,9 @@ defmodule O11yAdvisor.MixProject do
   defp deps do
     [
       {:phoenix, "~> 1.8.5"},
+      {:phoenix_live_view, "~> 1.0"},
       {:phoenix_ecto, "~> 4.5"},
-      {:ecto_sql, "~> 3.13"},
+      {:ecto_sql, "~> 3.13.0"},
       {:postgrex, ">= 0.0.0"},
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
@@ -57,6 +58,8 @@ defmodule O11yAdvisor.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
       {:bandit, "~> 1.5"},
+      {:arcana, "~> 2.0"},
+      {:tribunal, "~> 1.3", only: [:dev, :test]},
       {:excoveralls, "~> 0.18", only: :test},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
