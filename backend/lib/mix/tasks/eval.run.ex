@@ -67,6 +67,16 @@ defmodule Mix.Tasks.Eval.Run do
     Mix.shell().info("Average recall: #{format_float(metrics.average_recall)}")
   end
 
+  defp print_retrieval_report(%{
+         status: status,
+         test_case_count: test_case_count,
+         metrics: metrics
+       }) do
+    Mix.shell().info("Retrieval evals: #{test_case_count} cases")
+    Mix.shell().info("Retrieval status: #{status}")
+    print_metric_lines(metrics)
+  end
+
   defp print_retrieval_report(%{status: status, metrics: metrics}) do
     Mix.shell().info("Retrieval evals: #{retrieval_case_count(metrics)} cases")
     Mix.shell().info("Retrieval status: #{status}")

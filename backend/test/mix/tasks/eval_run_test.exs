@@ -47,7 +47,8 @@ defmodule Mix.Tasks.Eval.RunTest do
            tool: :arcana,
            mode: :hybrid,
            status: :ok,
-           metrics: %{test_case_count: 2, average_recall: 0.75, hit_rate: 1.0}
+           test_case_count: 2,
+           metrics: %{average_recall: 0.75, hit_rate: 1.0}
          }
        }}
     end
