@@ -11,6 +11,8 @@ config :o11y_advisor,
   ecto_repos: [O11yAdvisor.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+config :o11y_advisor, O11yAdvisor.Repo, types: O11yAdvisor.PostgrexTypes
+
 # Configure the endpoint
 config :o11y_advisor, O11yAdvisorWeb.Endpoint,
   url: [host: "localhost"],
@@ -29,6 +31,8 @@ config :logger, :default_formatter,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+config :arcana, repo: O11yAdvisor.Repo
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
