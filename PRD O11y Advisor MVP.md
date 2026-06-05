@@ -832,7 +832,7 @@ Decided in [ADR-0001](docs/adr/0001-polyglot-architecture.md) and [ADR-0002](doc
 - **Language:** Elixir/Phoenix
 - **RAG engine:** Arcana (graph RAG — hybrid vector + keyword search, graph community detection, cross-encoder reranking)
 - **Storage:** PostgreSQL + pgvector (documents, chunks, embeddings, knowledge graph)
-- **Embeddings:** `text-embedding-3-small` (OpenAI) for MVP; evaluate `nomic-embed-text` for offline mode
+- **Embeddings:** `BAAI/bge-base-en-v1.5` via Arcana's local embedder for MVP; evaluate larger local models if retrieval evals show a quality gap
 - **Docs ingestion:** GitHub API (primary); Markdown parser for `.md` files; HTML fallback for sources without a public repo
 - **Testing:** ExUnit; integration tests require real Postgres (no mocks)
 - **Eval:** Arcana eval (retrieval quality); Tribunal (answer quality + structured output validity) — see ADR-0002
@@ -920,7 +920,7 @@ Decided in [ADR-0001](docs/adr/0001-polyglot-architecture.md) and [ADR-0002](doc
 
 - MCP server wraps CLI internals (not a separate API layer). The Go CLI binary is the MCP stdio server.
 - Agent Skill targets Claude Code for MVP; Codex and Cursor are follow-on.
-- Embeddings: `text-embedding-3-small` for MVP.
+- Embeddings: `BAAI/bge-base-en-v1.5` via Arcana's local embedder for MVP.
 - Ingestion: GitHub repo source is the default; web scraping is secondary and requires explicit approval.
 - Storage: hosted PostgreSQL + pgvector on Fly.io. Local vector store and SQLite are not used. Knowledge base is shared infrastructure; users do not run their own copy. (ADR-0001)
 - Offline mode: deferred. The CLI requires network access to the hosted backend. A bundled snapshot may be added post-MVP. (ADR-0001)
