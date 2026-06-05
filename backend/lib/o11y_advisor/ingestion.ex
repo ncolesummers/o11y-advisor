@@ -23,10 +23,14 @@ defmodule O11yAdvisor.Ingestion do
     SourceRegistry.list_sources()
     |> Enum.reduce_while({:ok, []}, fn source, {:ok, acc} ->
       case ingest_source_and_store(source, opts) do
-        {:ok, stored} -> {:cont, {:ok, acc ++ stored}}
+        {:ok, stored} -> {:cont, {:ok, Enum.reverse(stored, acc)}}
         {:error, reason} -> {:halt, {:error, reason}}
       end
     end)
+    |> case do
+      {:ok, stored} -> {:ok, Enum.reverse(stored)}
+      {:error, reason} -> {:error, reason}
+    end
   end
 
   @spec ingest_source(Source.t(), keyword()) :: [Document.t()]
