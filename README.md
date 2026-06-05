@@ -35,7 +35,7 @@ Ingestion is a backend Mix task (`mix ingest.run`), run on demand and on a sched
 1. **Fetches** files matching the entry's `path_glob` at its pinned `version_pin` ref — the Git Trees API lists the repo tree, the glob filters it, and each match's raw Markdown is downloaded (`O11yAdvisor.Ingestion.GitHub`). Set `GITHUB_TOKEN`/`GH_TOKEN` to raise the API rate limit.
 2. **Parses** each file into an `O11yAdvisor.Ingestion.Document` with PRD §8 metadata stamped on — `source_url`, `title`, `project`, `content_type`, `license`, `retrieved_at`, `version` (the pinned ref), and `section_path` (`O11yAdvisor.Ingestion.MarkdownParser`).
 
-Documents are an in-memory handoff; chunking, embedding, and pgvector storage are the next stage (issue #18), which feeds each document to `Arcana.Ingest`.
+The full ingestion task chunks each parsed document, embeds chunks with Arcana's local `BAAI/bge-base-en-v1.5` embedder, and stores documents/chunks in Arcana's PostgreSQL + pgvector tables. Chunks retain source metadata for citation and version/license filtering.
 
 ## Repository layout
 

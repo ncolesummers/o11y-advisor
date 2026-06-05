@@ -27,6 +27,7 @@ defmodule O11yAdvisor.Ingestion.MarkdownParser do
       license: source.license,
       retrieved_at: Date.utc_today() |> Date.to_iso8601(),
       version: source.version_pin,
+      source_ref: source_ref(source, repo_path),
       section_path: section_path(repo_path)
     }
 
@@ -45,4 +46,6 @@ defmodule O11yAdvisor.Ingestion.MarkdownParser do
     |> Path.split()
     |> Enum.drop(-1)
   end
+
+  defp source_ref(source, repo_path), do: "#{source.repo}@#{source.version_pin}:#{repo_path}"
 end
