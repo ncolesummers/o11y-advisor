@@ -1,5 +1,10 @@
 import Config
 
+gemini_flash_model = "google:gemini-3.5-flash"
+
+config :arcana, llm: gemini_flash_model
+config :tribunal, llm: gemini_flash_model
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used

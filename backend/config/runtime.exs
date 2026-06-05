@@ -29,6 +29,14 @@ end
 config :o11y_advisor, O11yAdvisorWeb.Endpoint,
   http: [port: String.to_integer(System.get_env("PORT", "4000"))]
 
+if llm_model = System.get_env("O11Y_ADVISOR_LLM_MODEL") do
+  config :arcana, llm: llm_model
+end
+
+if judge_llm_model = System.get_env("O11Y_ADVISOR_JUDGE_LLM_MODEL") do
+  config :tribunal, llm: judge_llm_model
+end
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||
