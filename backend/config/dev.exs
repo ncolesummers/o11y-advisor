@@ -1,5 +1,10 @@
 import Config
 
+gemini_flash_model = "google:gemini-3.5-flash"
+
+config :arcana, llm: gemini_flash_model
+config :tribunal, llm: gemini_flash_model
+
 # Configure your database
 config :o11y_advisor, O11yAdvisor.Repo,
   username: "postgres",

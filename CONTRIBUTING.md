@@ -144,7 +144,9 @@ Write an ADR when the decision is:
 
 ## Local development setup
 
-Prerequisites will be documented here once the backend and CLI directories exist. Coming in Milestone 1:
+Backend Mix commands are run from `backend/`, so ReqLLM loads `backend/.env` during local runs. Copy `backend/.env.example` to `backend/.env` and fill in `GOOGLE_API_KEY`, or export `GOOGLE_API_KEY` in your shell before running eval or LLM-backed features.
+
+Prerequisites:
 
 - Elixir 1.18+ / OTP 27
 - Go 1.23+

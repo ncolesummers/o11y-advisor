@@ -19,6 +19,7 @@ vendor/
 # Secrets and environment
 .env
 .env.*
+!backend/.env.example
 *.secret
 config/prod.secret.exs
 config/runtime.secret.exs
