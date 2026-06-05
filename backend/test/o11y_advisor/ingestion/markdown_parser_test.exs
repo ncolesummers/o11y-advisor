@@ -62,6 +62,9 @@ defmodule O11yAdvisor.Ingestion.MarkdownParserTest do
     assert metadata.source_url ==
              "https://github.com/open-telemetry/semantic-conventions/blob/v1.29.0/docs/http/http-spans.md"
 
+    assert metadata.source_ref ==
+             "open-telemetry/semantic-conventions@v1.29.0:docs/http/http-spans.md"
+
     assert metadata.retrieved_at == Date.utc_today() |> Date.to_iso8601()
   end
 end

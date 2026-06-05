@@ -12,6 +12,14 @@ defmodule O11yAdvisor.Ingestion.StubFetcher do
   end
 end
 
+defmodule O11yAdvisor.Ingestion.StubChunkStore do
+  @moduledoc false
+
+  def store_all(documents, _opts) do
+    {:ok, Enum.map(documents, fn document -> %{document: document, chunks: []} end)}
+  end
+end
+
 defmodule O11yAdvisor.IngestionTest do
   use O11yAdvisor.DataCase, async: false
 
@@ -19,6 +27,7 @@ defmodule O11yAdvisor.IngestionTest do
 
   alias O11yAdvisor.Ingestion
   alias O11yAdvisor.Ingestion.Document
+  alias O11yAdvisor.Ingestion.StubChunkStore
   alias O11yAdvisor.Ingestion.StubFetcher
   alias O11yAdvisor.SourceRegistry
 
@@ -46,5 +55,27 @@ defmodule O11yAdvisor.IngestionTest do
     titles = Enum.map(documents, & &1.metadata.title)
     assert "HTTP Spans" in titles
     assert "Attributes" in titles
+  end
+
+  test "stores ingested documents without reversing source or document order" do
+    {:ok, _source} =
+      @source_attrs
+      |> Map.put(:repo, "a-org/fixture-repo")
+      |> SourceRegistry.create_source()
+
+    {:ok, _source} =
+      @source_attrs
+      |> Map.put(:repo, "b-org/fixture-repo")
+      |> SourceRegistry.create_source()
+
+    assert {:ok, stored} =
+             Ingestion.ingest_all_and_store(github: StubFetcher, chunk_store: StubChunkStore)
+
+    assert Enum.map(stored, fn %{document: document} -> document.metadata.source_ref end) == [
+             "a-org/fixture-repo@v0.0.0-fixture:docs/http/http-spans.md",
+             "a-org/fixture-repo@v0.0.0-fixture:docs/general/attributes.md",
+             "b-org/fixture-repo@v0.0.0-fixture:docs/http/http-spans.md",
+             "b-org/fixture-repo@v0.0.0-fixture:docs/general/attributes.md"
+           ]
   end
 end
